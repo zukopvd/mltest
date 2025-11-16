@@ -1,7 +1,7 @@
 fastapi
 uvicorn
 pydantic
-torch==2.2.0+cpu
+torch==2.2.0
 numpy
 pillow
 python-multipart
