@@ -38,6 +38,7 @@ class ImageRequest(BaseModel):
 # ----------------------------- #
 @app.post("/predict")
 def predict(data: ImageRequest):
+    print(f"Data to predict: {data.image_base64}")
     try:
         # 1. Декодируем Base64 → байты
         image_data = base64.b64decode(data.image_base64)
@@ -58,6 +59,7 @@ def predict(data: ImageRequest):
         with torch.no_grad():
             output = model(img_tensor)
             _, predicted = torch.max(output, 1)
+            print(f"Predicted: {predicted}")
 
         return {
             "prediction": int(predicted.item())
@@ -65,3 +67,4 @@ def predict(data: ImageRequest):
 
     except Exception as e:
         return {"error": str(e)}
+
